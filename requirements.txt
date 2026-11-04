@@ -1,0 +1,10 @@
+
+# We will use pytest to test our program
+
+pytest
+
+
+# You might need these for the optional bonuses: 
+# Pandas
+# plotly
+
