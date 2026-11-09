@@ -63,3 +63,4 @@ To run tests:
 ```sh
 pytest
 ```
+This is to squash and merge
