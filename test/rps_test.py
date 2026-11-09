@@ -4,6 +4,8 @@
 from app.rps import determine_winner
 
 
+def test_example():
+    assert 2 + 2 == 4
 
 
 def test_winners():
@@ -19,9 +21,10 @@ def test_winners():
 
     assert determine_winner(u="scissors", c="scissors") == "TIE GAME"
     assert determine_winner(u="scissors", c="paper") == "USER WINS"
-    assert determine_winner(u="scissors", c="rock") == "COMPUTER WINS
+    assert determine_winner(u="scissors", c="rock") == "COMPUTER WINS"
 
 
 
     # you may have more test functions here, but this is a good start for now
     
+    # another test function here
