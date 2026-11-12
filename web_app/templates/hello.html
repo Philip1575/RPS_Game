@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Hello | Rock Paper Scissors{% endblock %}
+{% block content %}
+<h1>{{ message }}</h1>
+<form method="get" action="{{ url_for('home_routes.hello_world') }}">
+    <label for="name">Your name</label>
+    <input id="name" name="name" type="text">
+    <button type="submit">Say hello</button>
+</form>
+{% endblock %}
