@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Rock Paper Scissors{% endblock %}</title>
+</head>
+<body>
+    <nav aria-label="Main navigation">
+        <a href="{{ url_for('home_routes.index') }}">Home</a> |
+        <a href="{{ url_for('home_routes.about') }}">About</a> |
+        <a href="{{ url_for('home_routes.hello_world') }}">Hello</a> |
+        <a href="{{ url_for('rps_routes.play') }}">Play Rock Paper Scissors</a>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

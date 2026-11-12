@@ -63,4 +63,15 @@ To run tests:
 ```sh
 pytest
 ```
-This is to squash and merge
+
+
+### Web app
+
+From the project directory, run (works in PowerShell too):
+
+```sh
+python -m flask --app web_app run
+```
+
+Open http://127.0.0.1:5000 in your browser. Visit `/rps` to play.
+Press Ctrl+C in the terminal to stop the server.
