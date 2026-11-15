@@ -33,6 +33,22 @@ conda activate rps-env
 pip install -r requirements.txt
 ```
 
+## Configuration
+
+The stocks dashboard requires an AlphaVantage API key. Obtain a premium AlphaVantage API key (shared by the professor, or using the [form](https://www.alphavantage.co/support/#api-key)).
+
+Create a local ".env" file in the project's root directory and store your API key in there as an environment variable:
+
+```sh
+# this is the ".env" file...
+
+ALPHAVANTAGE_API_KEY="______________"
+```
+
+The ".env" file is ignored by git (see ".gitignore"), so your API key will not be uploaded to GitHub. Never put your API key directly in a Python file.
+
+For the tests to pass on GitHub Actions, also add your API key as a repository secret: in your GitHub repo, go to Settings > Secrets and variables > Actions > New repository secret, and name it `ALPHAVANTAGE_API_KEY`.
+
 ## Usage
 
 some commands here to run our file(s)
@@ -54,6 +70,12 @@ python app/rps.py
 
 # alternatively:
 python -m app.rps
+```
+
+Run the stocks dashboard (fetches stock prices and opens a chart in your browser):
+
+```sh
+python -m app.stocks
 ```
 
 ## Testing

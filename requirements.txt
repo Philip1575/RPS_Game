@@ -4,9 +4,10 @@
 pytest
 
 
-# You might need these for the optional bonuses: 
-# Pandas
-# plotly
+# stocks dashboard:
+pandas
+python-dotenv
+plotly
 
 
 
