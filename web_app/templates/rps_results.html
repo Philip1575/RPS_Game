@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Results | Rock Paper Scissors{% endblock %}
+{% block content %}
+<h1>{{ outcome }}</h1>
+<p>Your choice: {{ user_choice }}</p>
+<p>Computer's choice: {{ computer_choice }}</p>
+<p><a href="/rps/form">Play again</a></p>
+{% endblock %}
