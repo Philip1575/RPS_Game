@@ -10,6 +10,11 @@ VALID_OPTIONS = ["rock", "paper", "scissors"]
 
 # 3. FUNCTIONS OR CLASSES
 
+def generate_random_choice():
+    """Returns a random choice for the computer: "rock", "paper", or "scissors"."""
+    return random.choice(VALID_OPTIONS)
+
+
 def determine_winner(u, c):
     if u == "rock" and c == "rock":
         # print("TIE GAME")
@@ -60,7 +65,7 @@ if __name__ == "__main__":
 
     # GENERATE RANDOM COMPUTER CHOICE
 
-    computer_choice = random.choice(VALID_OPTIONS)
+    computer_choice = generate_random_choice()
     print("COMP:", computer_choice)
 
     # DETERMINE THE WINNER

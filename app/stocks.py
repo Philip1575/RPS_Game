@@ -12,6 +12,11 @@ load_dotenv()  # loads environment variables from the ".env" file
 ALPHAVANTAGE_API_KEY = os.getenv("ALPHAVANTAGE_API_KEY")
 
 
+def format_usd(price):
+    """Formats a number as US dollars, like 1234.5678 -> "$1,234.57"."""
+    return f"${price:,.2f}"
+
+
 def fetch_stocks_csv(symbol="NFLX"):
     """Fetches daily stock prices from the AlphaVantage API.
 
@@ -25,6 +30,12 @@ def fetch_stocks_csv(symbol="NFLX"):
         f"&symbol={symbol}&apikey={ALPHAVANTAGE_API_KEY}&datatype=csv"
     )
     stocks_df = read_csv(request_url)
+
+    # for an invalid symbol (or a rate limit), the API sends back a message
+    # instead of price data, so the expected columns will be missing
+    if "adjusted_close" not in stocks_df.columns:
+        raise ValueError(f"No price data found for symbol '{symbol}'")
+
     return stocks_df
 
 

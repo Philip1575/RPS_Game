@@ -2,7 +2,13 @@
 
 from pandas import DataFrame
 
-from app.stocks import fetch_stocks_csv, make_stocks_chart
+from app.stocks import fetch_stocks_csv, make_stocks_chart, format_usd
+
+
+def test_formatting():
+    assert format_usd(10) == "$10.00"
+    assert format_usd(1234.5678) == "$1,234.57"
+    assert format_usd(0.12) == "$0.12"
 
 
 def test_data_fetching():

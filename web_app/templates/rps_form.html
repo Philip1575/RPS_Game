@@ -1,0 +1,30 @@
+{% extends "bootstrap_5_layout.html" %}
+{% block title %}Play | Philip's Web App{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <h1 class="h3 mb-2"><i class="bi bi-controller me-2"></i>Rock Paper Scissors</h1>
+                <p class="text-body-secondary mb-4">Choose your move, then click Play to see if you beat the computer.</p>
+
+                <form method="post" action="/rps/results">
+                    <div class="mb-4">
+                        <label for="user_choice" class="form-label fw-semibold">Your choice</label>
+                        <select id="user_choice" name="user_choice" class="form-select form-select-lg">
+                            {% for option in options %}
+                            <option value="{{ option }}">{{ option|capitalize }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-play-fill me-1"></i>Play
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,6 +1,16 @@
-{% extends "base.html" %}
+{% extends "bootstrap_5_layout.html" %}
+{% block title %}Home | Philip's Web App{% endblock %}
 {% block content %}
-<h1>Welcome Home</h1>
-<p>Challenge the computer to a game of rock, paper, scissors.</p>
-<p><a href="{{ url_for('rps_routes.play') }}">Play a round</a></p>
+<section class="p-4 p-md-5 mb-4 bg-white rounded-3 shadow-sm border">
+    <h1 class="display-5 fw-bold mb-3">Welcome Home</h1>
+    <p class="fs-5 text-body-secondary mb-4">Challenge the computer to a game of rock, paper, scissors, or look up recent stock prices.</p>
+    <div class="d-flex flex-wrap gap-2">
+        <a href="/rps/form" class="btn btn-primary btn-lg">
+            <i class="bi bi-controller me-2"></i>Play a round
+        </a>
+        <a href="/stocks/form" class="btn btn-success btn-lg">
+            <i class="bi bi-graph-up-arrow me-2"></i>Look up a stock
+        </a>
+    </div>
+</section>
 {% endblock %}
