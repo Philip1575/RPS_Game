@@ -1,6 +1,11 @@
-{% extends "base.html" %}
+{% extends "bootstrap_5_layout.html" %}
+{% block title %}Home | Philip's Web App{% endblock %}
 {% block content %}
-<h1>Welcome Home</h1>
-<p>Challenge the computer to a game of rock, paper, scissors.</p>
-<p><a href="/rps/form">Play a round</a></p>
+<section class="p-4 p-md-5 mb-4 bg-white rounded-3 shadow-sm border">
+    <h1 class="display-5 fw-bold mb-3">Welcome Home</h1>
+    <p class="fs-5 text-body-secondary mb-4">Challenge the computer to a game of rock, paper, scissors.</p>
+    <a href="/rps/form" class="btn btn-primary btn-lg">
+        <i class="bi bi-controller me-2"></i>Play a round
+    </a>
+</section>
 {% endblock %}
