@@ -1,6 +1,6 @@
 # this is the "web_app/routes/stocks_routes.py" file...
 
-from flask import Blueprint, request, render_template, redirect
+from flask import Blueprint, request, render_template, redirect, flash
 
 from app.stocks import fetch_stocks_csv, format_usd
 
@@ -36,6 +36,7 @@ def stocks_dashboard():
         latest_date = df.iloc[0]["timestamp"]
         data = df.to_dict("records")
 
+        flash(f"Fetched market data for {symbol}!", "success")
         return render_template("stocks_dashboard.html",
             symbol=symbol,
             latest_close_usd=latest_close_usd,
@@ -44,6 +45,7 @@ def stocks_dashboard():
         )
     except Exception as err:
         print("OOPS", err)
+        flash(f"Market data error for '{symbol}'. Please check your symbol and try again!", "danger")
         return redirect("/stocks/form")
 
 

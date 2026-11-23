@@ -1,6 +1,6 @@
 # this is the "web_app/routes/rps_routes.py" file...
 
-from flask import Blueprint, request, render_template, redirect
+from flask import Blueprint, request, render_template, redirect, flash
 
 from app.rps import VALID_OPTIONS, determine_winner, generate_random_choice
 
@@ -24,6 +24,7 @@ def rps_results():
 
     user_choice = form_data.get("user_choice")
     if user_choice not in VALID_OPTIONS:
+        flash("Please choose rock, paper, or scissors.", "warning")
         return redirect("/rps/form")
 
     computer_choice = generate_random_choice()
