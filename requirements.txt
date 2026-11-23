@@ -13,3 +13,7 @@ plotly
 
 # web app:
 flask
+
+
+# production server (the deployed app installs from this file):
+gunicorn

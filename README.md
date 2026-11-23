@@ -78,6 +78,29 @@ Run the stocks dashboard (fetches stock prices and opens a chart in your browser
 python -m app.stocks
 ```
 
+### Web App
+
+From the project directory, run (works in PowerShell too):
+
+```sh
+python -m flask --app web_app run
+```
+
+Open http://127.0.0.1:5000 in your browser. Pages include:
+
+  + `/` (home), `/about`, and `/hello?name=Philip`
+  + `/rps/form`: choose rock, paper, or scissors from a dropdown, then see the results page
+  + `/stocks/form`: enter a stock symbol, then see a dashboard with a chart and a table of recent prices
+  + `/api/stocks.json?symbol=MSFT`: the same stock data as JSON
+
+Press Ctrl+C in the terminal to stop the server.
+
+The web app uses flash messages, which need a secret key. Locally a default is used, but you can set your own in the ".env" file:
+
+```sh
+SECRET_KEY="some long random value"
+```
+
 ## Testing
 
 To run tests:
@@ -86,14 +109,12 @@ To run tests:
 pytest
 ```
 
+The tests include the web app pages (see "test/web_app_test.py"). The stocks tests call the real AlphaVantage API, so they need the `ALPHAVANTAGE_API_KEY` (in ".env" locally, or as a repository secret on GitHub Actions).
 
-### Web app
+## Deployment
 
-From the project directory, run (works in PowerShell too):
+The web app can be deployed to a production server like [Render](https://render.com). Create a new "Web Service" from this GitHub repository with these settings:
 
-```sh
-python -m flask --app web_app run
-```
-
-Open http://127.0.0.1:5000 in your browser. Visit `/rps` to play.
-Press Ctrl+C in the terminal to stop the server.
+  + Build command: `pip install -r requirements.txt`
+  + Start command: `gunicorn "web_app:create_app()"`
+  + Environment variables: `ALPHAVANTAGE_API_KEY` (your API key) and `SECRET_KEY` (a long random value)
