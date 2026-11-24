@@ -2,8 +2,32 @@
 # it uses flask's test client to visit pages without running a real server
 
 import pytest
+from pandas import DataFrame
 
 from web_app import create_app
+import web_app.routes.stocks_routes as stocks_routes
+
+
+# a small fake dataset, so the web tests don't call the real API
+# (the real API is tested once in "test/stocks_test.py", and calling it
+# many times in a row can hit the API's rate limit and fail the build)
+FAKE_STOCKS_DF = DataFrame({
+    "timestamp": ["2026-11-20", "2026-11-19"],
+    "open": [100.0, 98.0],
+    "high": [102.0, 101.0],
+    "low": [99.0, 97.5],
+    "close": [101.5, 100.25],
+    "adjusted_close": [101.5, 100.25],
+    "volume": [1000000, 1200000],
+})
+
+
+def fake_fetch(symbol="NFLX"):
+    return FAKE_STOCKS_DF
+
+
+def fake_fetch_error(symbol="NFLX"):
+    raise ValueError(f"No price data found for symbol '{symbol}'")
 
 
 @pytest.fixture
@@ -48,15 +72,22 @@ def test_stocks_form(client):
     assert b'name="symbol"' in response.data
 
 
-def test_stocks_dashboard(client):
-    # this test calls the real AlphaVantage API
-    response = client.post("/stocks/dashboard", data={"symbol": "MSFT"})
+def test_stocks_dashboard(client, monkeypatch):
+    # swap in the fake data instead of calling the real API
+    monkeypatch.setattr(stocks_routes, "fetch_stocks_csv", fake_fetch)
+
+    response = client.post("/stocks/dashboard", data={"symbol": "msft"})
     assert response.status_code == 200
+    assert b"MSFT" in response.data
+    assert b"$101.50" in response.data  # latest close
     assert b"<table" in response.data
     assert b"chart-container" in response.data
 
 
-def test_stocks_invalid_symbol(client):
+def test_stocks_invalid_symbol(client, monkeypatch):
+    # simulate the API having no data for this symbol
+    monkeypatch.setattr(stocks_routes, "fetch_stocks_csv", fake_fetch_error)
+
     response = client.post("/stocks/dashboard", data={"symbol": "NOTAREALSYMBOLXYZ"}, follow_redirects=True)
     assert response.request.path == "/stocks/form"
     assert b"Market data error" in response.data
