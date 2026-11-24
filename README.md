@@ -1,5 +1,7 @@
 # my-first-app-fall-2026
 
+**Live web app:** https://philip-rps-web-app.onrender.com (hosted on Render's free plan, so the first page load after a period of inactivity can take up to a minute)
+
 ## Prerequisites
 
 Install python version 3.x (for example using Anaconda).
@@ -112,6 +114,8 @@ pytest
 The tests include the web app pages (see "test/web_app_test.py"). The stocks tests call the real AlphaVantage API, so they need the `ALPHAVANTAGE_API_KEY` (in ".env" locally, or as a repository secret on GitHub Actions).
 
 ## Deployment
+
+The app is deployed at https://philip-rps-web-app.onrender.com.
 
 The web app can be deployed to a production server like [Render](https://render.com). Create a new "Web Service" from this GitHub repository with these settings:
 
